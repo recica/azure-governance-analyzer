@@ -34,7 +34,7 @@ Python dependencies are listed in `requirements.txt`:
 ## Installation
 
 ```bash
-git clone https://github.com/updatezero/azure-governance-analyzer.git
+git clone https://github.com/recica/azure-governance-analyzer.git
 cd azure-governance-analyzer
 pip3 install -r requirements.txt
 ```

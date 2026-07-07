@@ -1,5 +1,7 @@
 # Azure Governance Analyzer
 
+> **In plain English:** This program checks a cloud environment for cleanup and safety issues — like servers that could be accidentally deleted because they're not protected, or unused resources that are quietly costing money every month without anyone using them.
+
 A Python command-line tool that analyzes Azure subscriptions for governance and cost hygiene issues: resource groups without delete locks, unattached managed disks, and unassociated public IPs.
 
 The tool can connect live to a real Azure subscription via the Azure SDK. If no live credentials are configured, it falls back to local sample data, so the tool always runs standalone.

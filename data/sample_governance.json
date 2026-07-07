@@ -1,0 +1,14 @@
+{
+    "resource_groups": [
+        {"name": "rg-prod-web", "location": "switzerlandnorth", "has_lock": true},
+        {"name": "rg-prod-logging", "location": "switzerlandnorth", "has_lock": false},
+        {"name": "rg-dev-app", "location": "westeurope", "has_lock": false}
+    ],
+    "unattached_disks": [
+        {"name": "disk-old-test-vm", "resource_group": "rg-dev-app", "location": "westeurope", "size_gb": 128}
+    ],
+    "unassociated_public_ips": [
+        {"name": "pip-old-lb-01", "resource_group": "rg-prod-logging", "location": "switzerlandnorth"},
+        {"name": "pip-test-vm-02", "resource_group": "rg-dev-app", "location": "westeurope"}
+    ]
+}

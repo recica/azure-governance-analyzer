@@ -1,0 +1,5 @@
+__pycache__/
+*.py[cod]
+governance_report.csv
+governance_report.md
+*.code-workspace

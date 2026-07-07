@@ -1,0 +1,98 @@
+# Azure Governance Analyzer
+
+A Python command-line tool that analyzes Azure subscriptions for governance and cost hygiene issues: resource groups without delete locks, unattached managed disks, and unassociated public IPs.
+
+The tool can connect live to a real Azure subscription via the Azure SDK. If no live credentials are configured, it falls back to local sample data, so the tool always runs standalone.
+
+## Features
+
+- Load governance data live from an Azure subscription via the Azure SDK, with automatic fallback to local sample data
+- Show resource groups and their lock status
+- Show unattached managed disks
+- Show unassociated public IPs
+- Show a summary report
+- Show governance findings (missing locks, orphaned/cost-incurring resources)
+- Export to CSV
+- Export a full report to Markdown
+
+## Why This Project Matters
+
+Cloud governance isn't just about security — it's about preventing accidental deletion of production resources (via resource locks) and avoiding silent cost waste from orphaned resources (unattached disks, unassociated public IPs keep billing even when unused). This project automates checks that are normally done manually in the Azure Portal, against a real subscription via the Azure SDK, while still working standalone against local sample data for anyone without Azure access.
+
+## Requirements
+
+- Python 3
+- Azure CLI (only needed for live mode, to authenticate via `az login`)
+
+Python dependencies are listed in `requirements.txt`:
+
+- `azure-identity`
+- `azure-mgmt-resource==23.1.1` (pinned — newer versions split `ManagementLockClient` out of this package)
+- `azure-mgmt-compute`
+- `azure-mgmt-network`
+
+## Installation
+
+```bash
+git clone https://github.com/updatezero/azure-governance-analyzer.git
+cd azure-governance-analyzer
+pip3 install -r requirements.txt
+```
+
+Run with local sample data:
+
+```bash
+python3 main.py
+```
+
+### Live mode (real Azure subscription)
+
+Authenticate once via the Azure CLI:
+
+```bash
+az login
+```
+
+Then set your subscription ID as an environment variable before running:
+
+```bash
+export AZURE_SUBSCRIPTION_ID=<your-subscription-id>
+python3 main.py
+```
+
+If authentication fails or no subscription ID is set, the tool automatically falls back to the local sample data in `data/sample_governance.json`.
+
+## Usage
+
+```text
+1. Show Resource Groups
+2. Show Unattached Disks
+3. Show Unassociated Public IPs
+4. Show Summary
+5. Show Governance Findings
+6. Export to CSV
+7. Export to Markdown
+8. Exit
+```
+
+## Project Structure
+
+```text
+azure-governance-analyzer/
+|-- data/
+|   `-- sample_governance.json
+|-- main.py
+|-- azure_client.py
+|-- requirements.txt
+|-- .gitignore
+`-- README.md
+```
+
+## Roadmap
+
+Possible future improvements:
+
+- Add Azure Policy compliance checks via Policy Insights
+- Add unattached network interfaces (NICs) as an orphaned-resource check
+- Add automated tests
+- Add a redacted sample live report, following the pattern used in the Azure Resource Reporter project

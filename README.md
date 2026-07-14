@@ -6,6 +6,8 @@ A Python command-line tool that analyzes Azure subscriptions for governance and 
 
 The tool can connect live to a real Azure subscription via the Azure SDK. If no live credentials are configured, it falls back to local sample data, so the tool always runs standalone.
 
+Its findings feed into [AI Security Assistant](https://github.com/recica/ai-security-assistant), which pulls together results from this tool and others into one prioritized summary.
+
 ## Features
 
 - Load governance data live from an Azure subscription via the Azure SDK, with automatic fallback to local sample data
